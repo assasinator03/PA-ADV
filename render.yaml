@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: police-academy-adv
+    env: node
+    plan: free
+    region: frankfurt
+    buildCommand: |
+      npm install
+    startCommand: |
+      node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+    autoDeploy: true

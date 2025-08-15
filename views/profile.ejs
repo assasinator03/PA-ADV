@@ -1,0 +1,11 @@
+
+<% layout('layout',{title:'Profil',active:'profile'}) -%>
+<h3>Changer mon mot de passe</h3>
+<% if (error) { %><div class="alert"><%= error %></div><% } %>
+<% if (ok) { %><div class="badge-rank">Mot de passe mis à jour.</div><% } %>
+<form method="post" action="/profile/password" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+  <div><label>Ancien mot de passe</label><input class="form-control" type="password" name="old" required/></div>
+  <div><label>Nouveau mot de passe</label><input class="form-control" type="password" name="new1" required/></div>
+  <div><label>Confirmer nouveau</label><input class="form-control" type="password" name="new2" required/></div>
+  <div style="grid-column:1/-1;display:flex;justify-content:flex-end"><button class="btn btn-primary">Mettre à jour</button></div>
+</form>
