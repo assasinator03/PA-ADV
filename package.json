@@ -1,24 +1,19 @@
 {
   "name": "police-academy-adv",
-  "version": "1.0.0",
-  "description": "Intranet Police-Academy-ADV (Gestion des effectifs, rôles, historique)",
+  "version": "2.0.0",
   "main": "app.js",
+  "type": "commonjs",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node app.js"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "connect-sqlite3": "^0.9.15",
+    "bcryptjs": "^2.4.3",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
-    "express-validator": "^7.0.1",
     "method-override": "^3.0.0",
-    "morgan": "^1.10.0",
-    "sqlite3": "^5.1.7"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.3"
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1"
   }
 }

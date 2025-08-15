@@ -1,29 +1,37 @@
-<% layout('layout') -%>
-<form method="post" action="<%= action %>">
-  <div class="row">
-    <div><label>Matricule</label><input type="text" name="matricule" value="<%= agent?.matricule || '' %>" required/></div>
-    <div><label>Téléphone</label><input type="text" name="phone" value="<%= agent?.phone || '' %>"/></div>
-    <div><label>Nom</label><input type="text" name="lastName" value="<%= agent?.lastName || '' %>" required/></div>
-    <div><label>Prénom</label><input type="text" name="firstName" value="<%= agent?.firstName || '' %>" required/></div>
-    <div><label>Grade</label><select name="grade" required>
-      <% ['rookie','officier-I','officier-II','officier-III'].forEach(g=>{ %>
+
+<% layout('layout',{title: formTitle, active:'agents'}) -%>
+<form method="post" action="<%= action %>" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+  <div><label>Matricule</label><input class="form-control" type="text" name="matricule" value="<%= agent?.matricule || '' %>" required/></div>
+  <div><label>Téléphone</label><input class="form-control" type="text" name="phone" value="<%= agent?.phone || '' %>"/></div>
+  <div><label>Nom</label><input class="form-control" type="text" name="lastName" value="<%= agent?.lastName || '' %>" required/></div>
+  <div><label>Prénom</label><input class="form-control" type="text" name="firstName" value="<%= agent?.firstName || '' %>" required/></div>
+  <div>
+    <label>Grade</label>
+    <select class="form-select" name="grade" required>
+      <% ['rookie','officier-I','officier-II','officier-III','sergent','sergent-chef','lieutenant','lieutenant-chef','capitaine','commandant'].forEach(g=>{ %>
         <option value="<%= g %>" <%= (agent?.grade===g)?'selected':'' %>><%= g %></option>
       <% }) %>
-    </select></div>
-    <div><label>Brigade</label><select name="brigade">
+    </select>
+  </div>
+  <div>
+    <label>Brigade</label>
+    <select class="form-select" name="brigade">
       <option value="">—</option>
       <% ['Mary','ASD','BIJ','DOA','Crime','HP','Medic','PA'].forEach(b=>{ %>
         <option value="<%= b %>" <%= (agent?.brigade===b)?'selected':'' %>><%= b %></option>
       <% }) %>
-    </select></div>
+    </select>
   </div>
-  <div style="margin-top:12px"><label>Formations</label>
-    <div class="grid four" style="margin-top:8px">
+  <div style="grid-column:1/-1">
+    <label>Formations</label>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px;margin-top:5px">
       <% ['10-20','ISTC','procédure','first-Lincoln','Déminage'].forEach(fm => { %>
-        <label style="display:flex; gap:8px; align-items:center"><input type="checkbox" name="formations" value="<%= fm %>" <%= selectedFormations?.includes(fm)?'checked':'' %> />
-          <span><%= fm %></span></label>
+        <label><input type="checkbox" name="formations" value="<%= fm %>" <%= selectedFormations?.includes(fm)?'checked':'' %> /> <%= fm %></label>
       <% }) %>
     </div>
   </div>
-  <div style="margin-top:16px; display:flex; justify-content:flex-end; gap:8px"><a class="btn" href="/agents">Annuler</a><button class="btn primary" type="submit">Enregistrer</button></div>
+  <div style="grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px">
+    <a class="btn" href="/agents">Annuler</a>
+    <button class="btn btn-primary" type="submit">Enregistrer</button>
+  </div>
 </form>

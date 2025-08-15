@@ -1,14 +1,15 @@
-<% layout('layout') -%>
+
+<% layout('layout',{title:'Historique',active:'history'}) -%>
 <table class="table">
-  <thead><tr><th>Date</th><th>Agent PA</th><th>Matricule cible</th><th>Action</th></tr></thead>
+  <thead><tr><th>Date</th><th>Agent PA</th><th>Matricule ciblé</th><th>Action</th></tr></thead>
   <tbody>
-  <% logs.forEach(l => { %>
-    <tr>
-      <td><%= new Date(l.createdAt).toLocaleString('fr-FR') %></td>
-      <td><%= l.actor %></td>
-      <td><%= l.targetMatricule %></td>
-      <td><%= l.action %></td>
-    </tr>
-  <% }) %>
+    <% history.forEach(h => { %>
+      <tr>
+        <td><%= new Date(h.at).toLocaleString('fr-FR') %></td>
+        <td><%= h.actor %></td>
+        <td><%= h.targetMatricule %></td>
+        <td><%= h.action %></td>
+      </tr>
+    <% }) %>
   </tbody>
 </table>
