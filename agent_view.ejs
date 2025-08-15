@@ -1,0 +1,28 @@
+<% layout('layout') -%>
+<div class="grid two">
+  <div>
+    <h3 style="margin:0 0 6px">Informations</h3>
+    <div class="badge">Matricule: <%= agent.matricule %></div>
+    <p><strong><%= agent.lastName %> <%= agent.firstName %></strong></p>
+    <p>Téléphone: <%= agent.phone || '-' %></p>
+    <p>Grade: <span class="badge"><%= agent.grade %></span></p>
+    <p>Brigade: <%= agent.brigade || '-' %></p>
+  </div>
+  <div>
+    <h3 style="margin:0 0 6px">Formations</h3>
+    <% if (formations.length === 0) { %>
+      <div class="alert">Aucune formation.</div>
+    <% } %>
+    <div class="grid two">
+      <% formations.forEach(fm => { %>
+        <div class="badge"><%= fm %></div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end">
+  <a class="btn" href="/agents">Retour</a>
+  <% if (canEdit) { %>
+    <a class="btn" href="/agents/<%= agent.id %>/edit">Modifier</a>
+  <% } %>
+</div>

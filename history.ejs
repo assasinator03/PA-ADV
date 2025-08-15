@@ -1,0 +1,14 @@
+<% layout('layout') -%>
+<table class="table">
+  <thead><tr><th>Date</th><th>Agent PA</th><th>Matricule cible</th><th>Action</th></tr></thead>
+  <tbody>
+  <% logs.forEach(l => { %>
+    <tr>
+      <td><%= new Date(l.createdAt).toLocaleString('fr-FR') %></td>
+      <td><%= l.actor %></td>
+      <td><%= l.targetMatricule %></td>
+      <td><%= l.action %></td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>

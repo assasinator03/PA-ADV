@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title><%= title %> — Police-Academy-ADV</title>
+  <link rel="stylesheet" href="/css/styles.css"/>
+  <link rel="icon" href="/images/logo.png"/>
+</head>
+<body>
+<div class="container">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="/images/logo.png" alt="logo"/>
+      <div>
+        <h1>Police-Academy-ADV</h1>
+        <small>Los Santos Police Department</small>
+      </div>
+    </div>
+    <% if (user) { %>
+    <nav class="nav">
+      <a href="/">Accueil</a>
+      <a href="/agents">Liste du personnel</a>
+      <a href="/history">Historique</a>
+      <% if (user.role === 'ADMIN') { %><a href="/admin">Administration</a><% } %>
+      <a href="/profile">Profil</a>
+      <a href="/logout">Déconnexion</a>
+    </nav>
+    <% } %>
+  </aside>
+  <main class="main">
+    <div class="header">
+      <h2><%= title %></h2>
+      <% if (user) { %>
+        <div class="badge">Connecté : <strong><%= user.username %></strong> — Rôle: <%= user.role %></div>
+      <% } %>
+    </div>
+    <section class="card"><%- body %></section>
+    <div class="footer">© <%= new Date().getFullYear() %> Police-Academy-ADV</div>
+  </main>
+</div>
+</body>
+</html>

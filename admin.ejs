@@ -1,0 +1,28 @@
+<% layout('layout') -%>
+<h3>Créer un compte</h3>
+<form method="post" action="/admin/users">
+  <div class="row">
+    <div><label>Utilisateur (login)</label><input required name="username" placeholder="ex: jsmith"/></div>
+    <div><label>Mot de passe initial</label><input required type="password" name="password" minlength="6"/></div>
+    <div><label>Rôle</label><select name="role"><option>AGENT</option><option>PA</option><option>ADMIN</option></select></div>
+  </div>
+  <div style="margin-top:12px; display:flex; justify-content:flex-end; gap:8px"><button class="btn success">Créer</button></div>
+</form>
+<h3 style="margin-top:22px">Utilisateurs</h3>
+<table class="table">
+  <thead><tr><th>Utilisateur</th><th>Rôle</th><th>1ère connexion ?</th><th></th></tr></thead>
+  <tbody>
+  <% users.forEach(u => { %>
+    <tr>
+      <td><%= u.username %></td>
+      <td><%= u.role %></td>
+      <td><%= u.mustChangePassword ? 'OUI' : 'NON' %></td>
+      <td style="text-align:right">
+        <% if (u.username !== user.username) { %>
+          <form method="post" action="/admin/users/<%= u.id %>/delete" style="display:inline"><button class="btn danger" onclick="return confirm('Supprimer cet utilisateur ?')">Supprimer</button></form>
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
