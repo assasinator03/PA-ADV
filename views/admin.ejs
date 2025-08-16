@@ -1,0 +1,24 @@
+<%- include('partials/head') %>
+<div class="bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">Panneau Admin - Gestion des comptes</h2>
+  <a href="/admin/users/new" class="bg-green-600 text-white px-3 py-2 rounded mb-4 inline-block">Créer un compte</a>
+  <table class="w-full table-auto border">
+    <thead><tr class="bg-gray-100"><th class="p-2">Matricule</th><th>Nom</th><th>Prénom</th><th>Rôle</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% users.forEach(u => { %>
+        <tr class="border-t">
+          <td class="p-2"><%= u.matricule %></td>
+          <td class="p-2"><%= u.nom %></td>
+          <td class="p-2"><%= u.prenom %></td>
+          <td class="p-2"><%= u.role %></td>
+          <td class="p-2">
+            <form method="post" action="/admin/users/<%= u.id %>/delete" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+              <button class="bg-red-600 text-white px-2 py-1 rounded">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('partials/footer') %>

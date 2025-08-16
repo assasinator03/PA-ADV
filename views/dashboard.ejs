@@ -1,0 +1,37 @@
+<%- include('partials/head') %>
+<div class="flex justify-between items-center mb-4">
+  <form method="get" action="/dashboard" class="flex gap-2">
+    <input name="q" value="<%= q %>" placeholder="Rechercher par matricule" class="border p-2 rounded" />
+    <button class="bg-blue-700 text-white px-3 rounded">Rechercher</button>
+  </form>
+  <div class="flex gap-2">
+    <% if (currentUser && (currentUser.role === 'PA' || currentUser.role === 'admin')) { %>
+      <a href="/agents/new" class="bg-green-600 text-white px-3 py-2 rounded">Nouvelle fiche</a>
+    <% } %>
+    <% if (currentUser && currentUser.role === 'admin') { %>
+      <a href="/admin" class="bg-gray-700 text-white px-3 py-2 rounded">Admin</a>
+    <% } %>
+    <form method="post" action="/logout"><button class="bg-red-600 text-white px-3 py-2 rounded">Déconnexion</button></form>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <% agents.forEach(function(a){ %>
+    <div class="bg-white p-4 rounded shadow">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="font-bold text-lg"><%= a.nom %> <%= a.prenom %></h3>
+          <p class="text-sm">Matricule: <%= a.matricule %> — Grade: <%= a.grade %> — Brigade: <%= a.brigade %></p>
+        </div>
+        <div class="flex gap-2">
+          <a href="/agents/<%= a.id %>" class="text-blue-700">Voir</a>
+          <% if (currentUser && (currentUser.role === 'PA' || currentUser.role === 'admin')) { %>
+            <a href="/agents/<%= a.id %>/edit" class="text-green-700">Modifier</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  <% }); %>
+</div>
+
+<%- include('partials/footer') %>

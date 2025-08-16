@@ -1,0 +1,40 @@
+<%- include('partials/head') %>
+<div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold mb-4"><%= agent ? 'Modifier fiche' : 'Nouvelle fiche agent' %></h2>
+  <% if (error) { %><div class="bg-red-100 text-red-800 p-2 rounded mb-3"><%= error %></div><% } %>
+  <form method="post" action="<%= agent ? '/agents/' + agent.id + '/edit' : '/agents/new' %>" class="space-y-3">
+    <div class="grid grid-cols-2 gap-2">
+      <input name="nom" placeholder="Nom" class="border p-2 rounded" value="<%= agent ? agent.nom : '' %>" required />
+      <input name="prenom" placeholder="Prénom" class="border p-2 rounded" value="<%= agent ? agent.prenom : '' %>" required />
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+      <input name="matricule" placeholder="Matricule" class="border p-2 rounded" value="<%= agent ? agent.matricule : '' %>" required />
+      <input name="telephone" placeholder="Téléphone" class="border p-2 rounded" value="<%= agent ? agent.telephone : '' %>" />
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+      <select name="grade" class="border p-2 rounded">
+        <% const grades = ['rookie','officier-I','officier-II','officier-III','sergent','sergent chef','lieutenant','lieutenant chef','capitaine','commandant']; %>
+        <% grades.forEach(g => { %>
+          <option value="<%= g %>" <% if (agent && agent.grade === g) { %> selected <% } %>><%= g %></option>
+        <% }) %>
+      </select>
+      <select name="brigade" class="border p-2 rounded">
+        <% const brigs = ['Mary','ASD','BIJ','DOA','Crime','HP','Medic','PA']; %>
+        <% brigs.forEach(b => { %>
+          <option value="<%= b %>" <% if (agent && agent.brigade === b) { %> selected <% } %>><%= b %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Formations (ctrl+click pour multi)</label>
+      <% const forms = ['10-20','ISTC','procédure','first-Lincoln','déminage']; %>
+      <select name="formations" multiple class="w-full border p-2 rounded">
+        <% forms.forEach(f => { %>
+          <option value="<%= f %>" <% if (agent && agent.formations && agent.formations.split(',').includes(f)) { %> selected <% } %>><%= f %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div><button class="bg-blue-700 text-white px-4 py-2 rounded">Enregistrer</button></div>
+  </form>
+</div>
+<%- include('partials/footer') %>
