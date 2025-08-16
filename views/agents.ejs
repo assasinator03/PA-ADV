@@ -1,0 +1,41 @@
+
+<% layout('layout',{title:'Personnel',active:'agents'}) -%>
+<form method="get" action="/agents" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+  <div style="flex:1;min-width:220px">
+    <label>Recherche par matricule</label>
+    <input class="form-control" type="search" name="q" placeholder="ex: 12345" value="<%= q || '' %>"/>
+  </div>
+  <button class="btn">Rechercher</button>
+  <% if (canEdit) { %>
+  <a class="btn btn-success" href="/agents/new">+ Nouvel agent</a>
+  <% } %>
+</form>
+
+<div class="table-responsive" style="margin-top:10px">
+<table class="table">
+  <thead><tr><th>Matricule</th><th>Nom</th><th>Prénom</th><th>Téléphone</th><th>Grade</th><th>Brigade</th><th style="text-align:right">Actions</th></tr></thead>
+  <tbody>
+  <% agents.forEach(a => { %>
+    <tr>
+      <td><%= a.matricule %></td>
+      <td><%= a.lastName %></td>
+      <td><%= a.firstName %></td>
+      <td><%= a.phone || '-' %></td>
+      <td><span class="badge-rank"><%= a.grade %></span></td>
+      <td><%= a.brigade || '-' %></td>
+      <td style="text-align:right">
+        <div class="table-actions">
+          <a class="btn" href="/agents/<%= a.id %>">Voir</a>
+          <% if (canEdit) { %>
+            <a class="btn" href="/agents/<%= a.id %>/edit">Éditer</a>
+            <form method="post" action="/agents/<%= a.id %>/delete" onsubmit="return confirm('Supprimer cette fiche ?')">
+              <button class="btn btn-danger">Supprimer</button>
+            </form>
+          <% } %>
+        </div>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,15 @@
+
+<% layout('layout',{title:'Historique',active:'history'}) -%>
+<table class="table">
+  <thead><tr><th>Date</th><th>Agent PA</th><th>Matricule ciblé</th><th>Action</th></tr></thead>
+  <tbody>
+    <% history.forEach(h => { %>
+      <tr>
+        <td><%= new Date(h.at).toLocaleString('fr-FR') %></td>
+        <td><%= h.actor %></td>
+        <td><%= h.targetMatricule %></td>
+        <td><%= h.action %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

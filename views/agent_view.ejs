@@ -1,0 +1,32 @@
+
+<% layout('layout',{title:'Fiche agent',active:'agents'}) -%>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+  <div>
+    <h3>Informations</h3>
+    <div class="badge-rank" style="margin-bottom:8px">Matricule: <%= agent.matricule %></div>
+    <p style="margin:0"><strong><%= agent.lastName %> <%= agent.firstName %></strong></p>
+    <p style="margin:0">Téléphone: <%= agent.phone || '-' %></p>
+    <p style="margin:0">Grade: <span class="badge-rank"><%= agent.grade %></span></p>
+    <p style="margin:0">Brigade: <%= agent.brigade || '-' %></p>
+  </div>
+  <div>
+    <h3>Formations</h3>
+    <% if (formations.length === 0) { %>
+      <div class="badge-rank">Aucune formation.</div>
+    <% } %>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <% formations.forEach(fm => { %>
+        <span class="badge-rank"><%= fm %></span>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
+  <a class="btn" href="/agents">Retour</a>
+  <% if (canEdit) { %>
+    <a class="btn" href="/agents/<%= agent.id %>/edit">Modifier</a>
+    <form method="post" action="/agents/<%= agent.id %>/delete" onsubmit="return confirm('Supprimer cette fiche ?')">
+      <button class="btn btn-danger">Supprimer</button>
+    </form>
+  <% } %>
+</div>

@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Connexion — Police-Academy-ADV</title>
+  <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+  <div class="login-wrap">
+    <img class="logo-large" src="/images/logo.png" alt="logo"/>
+    <h2>Connexion</h2>
+    <% if (error) { %><div class="alert"><%= error %></div><% } %>
+    <form method="post" action="/login" style="text-align:left">
+      <label>Utilisateur</label>
+      <input class="form-control" type="text" name="username" required placeholder="ex: jdoe"/>
+      <label>Mot de passe</label>
+      <input class="form-control" type="password" name="password" required/>
+      <div style="display:flex;justify-content:flex-end;margin-top:10px">
+        <button class="btn btn-primary" type="submit">Se connecter</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
