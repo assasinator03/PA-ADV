@@ -1,0 +1,18 @@
+<%- include('partials/head') %>
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">Créer un utilisateur</h2>
+  <% if (error) { %><div class="bg-red-100 text-red-800 p-2 rounded mb-3"><%= error %></div><% } %>
+  <form method="post" action="/admin/users/new" class="space-y-3">
+    <input name="matricule" placeholder="Matricule" class="w-full border p-2 rounded" required />
+    <input name="nom" placeholder="Nom" class="w-full border p-2 rounded" required />
+    <input name="prenom" placeholder="Prénom" class="w-full border p-2 rounded" required />
+    <select name="role" class="w-full border p-2 rounded">
+      <option value="agent">agent</option>
+      <option value="PA">PA</option>
+      <option value="admin">admin</option>
+    </select>
+    <input name="password" placeholder="Mot de passe initial (optionnel)" class="w-full border p-2 rounded" />
+    <div><button class="bg-blue-700 text-white px-4 py-2 rounded">Créer</button></div>
+  </form>
+</div>
+<%- include('partials/footer') %>
