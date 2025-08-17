@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+<div class="bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">Historique des modifications</h2>
+  <% if (logs.length === 0) { %>
+    <p>Aucun historique.</p>
+  <% } else { %>
+    <ul class="space-y-2">
+      <% logs.forEach(l => { %>
+        <li class="p-2 border rounded">
+          <div class="text-sm">Agent modifié: <%= l.agent_id %> — Par: <%= l.pa_matricule %> (<%= l.pa_nom %>) — <%= new Date(Number(l.date)).toLocaleString() %></div>
+          <pre class="text-xs bg-gray-100 p-2 rounded mt-2"><%= l.changes %></pre>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+<%- include('partials/footer') %>
